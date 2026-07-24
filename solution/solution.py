@@ -123,15 +123,10 @@ def compare_models(prompt: str) -> dict:
     mini_text, mini_time = call_openai_mini(prompt)
 
     # Bước 2: Ước tính chi phí output
-    pricing = PRICING_PER_1K_TOKENS.get(
-        OPENAI_MODEL,
-        PRICING_PER_1K_TOKENS["gpt-4o"],
-    )
-
     gpt4o_cost = (
         (len(gpt4o_text.split()) / 0.75)
         / 1000
-        * pricing["output"]
+        * PRICING_PER_1K_TOKENS["gpt-4o"]["output"]
     )
 
     # Bước 3: Trả về đúng format
@@ -199,9 +194,7 @@ def chat_with_system_prompt(
 
     latency = time.time() - start
 
-    response_text = response.choices[0].message.content or ""
-
-    return response_text, latency
+    return response.choices[0].message.content, latency
 
 # ---------------------------------------------------------------------------
 # Task 2.2 — Đếm token bằng tiktoken
@@ -258,11 +251,8 @@ def estimate_cost(prompt: str, response: str, model: str = OPENAI_MODEL) -> dict
     completion_tokens = count_tokens(response, model)
 
     # Bước 2: Tra bảng giá (có fallback)
-    pricing = PRICING_PER_1K_TOKENS.get(
-        model,
-        PRICING_PER_1K_TOKENS["gpt-4o"],
-    )
-
+    pricing = PRICING_PER_1K_TOKENS[model]
+    
     # Bước 3: Tính chi phí
     prompt_cost = prompt_tokens / 1000 * pricing["input"]
     completion_cost = completion_tokens / 1000 * pricing["output"]

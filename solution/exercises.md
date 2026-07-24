@@ -93,7 +93,7 @@ cách khắc phục (ví dụ: tóm tắt các lượt cũ, tăng giới hạn c
 
 ## Danh Sách Kiểm Tra Nộp Bài
 
-- [ ] `python grade.py` — xem điểm tự động, mục tiêu ≥ 75/100
+- [x] `python grade.py` — xem điểm tự động, mục tiêu ≥ 75/100
 - [ ] Cả 4 checkpoint pytest đều pass
 - [ ] Tất cả 9 câu trong file này đã được trả lời
 - [ ] Đã copy bài làm vào folder `solution/`, push lên GitHub cá nhân và nộp link repo vào vlearn (theo hướng dẫn README)
